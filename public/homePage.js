@@ -32,19 +32,34 @@ setInterval(getCurrenсу, 60000);
 let moneyManager = new MoneyManager();
 moneyManager.addMoneyCallback = request => {
     ApiConnector.addMoney(request, response => {
-        response.success === true ? ProfileWidget.showProfile(response.data) : moneyManager.setMessage(true, response.error);
+        if (response.success === true) {
+            ProfileWidget.showProfile(response.data);
+            moneyManager.setMessage(true, response.success);
+        } else {
+            moneyManager.setMessage(false, response.error);
+        }
     })
 }
 
 moneyManager.conversionMoneyCallback = request => {
     ApiConnector.convertMoney(request, response => {
-        response.success === true ? ProfileWidget.showProfile(response.data) : moneyManager.setMessage(true, response.error);
+        if (response.success === true) {
+            ProfileWidget.showProfile(response.data);
+            moneyManager.setMessage(true, response.success);
+        } else {
+            moneyManager.setMessage(false, response.error);
+        }
     })
 }
 
 moneyManager.sendMoneyCallback = request => {
     ApiConnector.transferMoney(request, response => {
-        response.success === true ? ProfileWidget.showProfile(response.data) : moneyManager.setMessage(true, response.error);
+        if (response.success === true) {
+            ProfileWidget.showProfile(response.data);
+            moneyManager.setMessage(true, response.success);
+        } else {
+            moneyManager.setMessage(false, response.error);
+        }
     })
 }
 
@@ -64,8 +79,9 @@ favoriteWidget.addUserCallback = request => {
             favoriteWidget.clearTable();
             favoriteWidget.fillTable(response.data);
             moneyManager.updateUsersList(response.data);
+            favoriteWidget.setMessage(true, response.success);
         } else {
-            favoriteWidget.setMessage(true, response.error);
+            favoriteWidget.setMessage(false, response.error);
         }
     })
 }
@@ -76,8 +92,9 @@ favoriteWidget.removeUserCallback = request => {
             favoriteWidget.clearTable();
             favoriteWidget.fillTable(response.data);
             moneyManager.updateUsersList(response.data);
+            favoriteWidget.setMessage(true, response.success);
         } else {
-            favoriteWidget.setMessage(true, response.error);
+            favoriteWidget.setMessage(false, response.error);
         }
     })
 }
