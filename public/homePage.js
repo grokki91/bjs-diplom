@@ -34,7 +34,7 @@ moneyManager.addMoneyCallback = request => {
     ApiConnector.addMoney(request, response => {
         if (response.success === true) {
             ProfileWidget.showProfile(response.data);
-            moneyManager.setMessage(true, response.success);
+            moneyManager.setMessage(true, response.success = 'Баланс пополнен');
         } else {
             moneyManager.setMessage(false, response.error);
         }
@@ -45,7 +45,7 @@ moneyManager.conversionMoneyCallback = request => {
     ApiConnector.convertMoney(request, response => {
         if (response.success === true) {
             ProfileWidget.showProfile(response.data);
-            moneyManager.setMessage(true, response.success);
+            moneyManager.setMessage(true, response.success = 'Деньги успешно конвертированы');
         } else {
             moneyManager.setMessage(false, response.error);
         }
@@ -56,7 +56,7 @@ moneyManager.sendMoneyCallback = request => {
     ApiConnector.transferMoney(request, response => {
         if (response.success === true) {
             ProfileWidget.showProfile(response.data);
-            moneyManager.setMessage(true, response.success);
+            moneyManager.setMessage(true, response.success = 'Перевод выполнен');
         } else {
             moneyManager.setMessage(false, response.error);
         }
@@ -79,7 +79,7 @@ favoriteWidget.addUserCallback = request => {
             favoriteWidget.clearTable();
             favoriteWidget.fillTable(response.data);
             moneyManager.updateUsersList(response.data);
-            favoriteWidget.setMessage(true, response.success);
+            favoriteWidget.setMessage(true, response.success = 'Пользователь добавлен');
         } else {
             favoriteWidget.setMessage(false, response.error);
         }
@@ -92,7 +92,7 @@ favoriteWidget.removeUserCallback = request => {
             favoriteWidget.clearTable();
             favoriteWidget.fillTable(response.data);
             moneyManager.updateUsersList(response.data);
-            favoriteWidget.setMessage(true, response.success);
+            favoriteWidget.setMessage(true, response.success = 'Пользователь удален');
         } else {
             favoriteWidget.setMessage(false, response.error);
         }
